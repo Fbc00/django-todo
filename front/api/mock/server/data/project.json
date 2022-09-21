@@ -1,0 +1,20 @@
+{
+    "projects": [
+        {
+          "id": 1,
+          "project": "Trabalho"
+        },
+        {
+          "id": 2,
+          "project": "Contas"
+        },
+        {
+          "id": 3,
+          "project": "Estudos"
+        },
+        {
+          "id": 4,
+          "project": "Saude"
+        }
+      ]
+}

@@ -1,24 +1,35 @@
 <template>
-  <v-container
-    class="d-flex flex-column align-center justify-space-around"
-    fill-height
-  >
-    <h1>To do List do DaniDanis</h1>
-    <v-img
-      src="../assets/ashe-chib.png"
-      max-height="350"
-      max-width="350"
+  <v-container class="container"> 
+      <h1>Welcome Invocador</h1> 
+      <h2> Todo-Route-List</h2>
+    <v-img src="@/assets/logo.svg"
+    max-width="400"
+    min-width="400"
+    max-height="400"
     ></v-img>
-    <v-btn x-large @click="vaiParaLogin">Iniciar</v-btn>
+    <v-btn color="primary" x-large :to="{name: 'login'}"
+    fab > <v-icon> fa-solid fa-forward </v-icon> </v-btn>
   </v-container>
 </template>
 
 <script>
 export default {
-  methods: {
-    vaiParaLogin() {
-      this.$router.push("/login");
-    },
-  },
-};
+
+}
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  height: calc(100vh - 150px);
+  gap: 1.2rem;
+}
+ h1, h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+ }
+</style>

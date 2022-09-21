@@ -1,98 +1,94 @@
 <template>
-  <v-container class="pink lighten-4 d-flex flex-column" fill-height>
-    <!-- snackbar -->
-    <v-snackbar v-model="snackbar.show" :value="true" absolute left shaped top>
-      {{ snackbar.message }}
-    </v-snackbar>
+  <v-container >
     <v-row class="text-center">
-      <v-col md="6" offset-md="3">
-        <v-card class="pa-4 rounded mt-6" outlined tile width="750">
-          <h2>Login</h2>
-          <v-form v-model="valid">
-            <v-text-field
-              v-model="username"
-              label="Usuário"
-              required
-              outlined
-              append-icon="fa-user"
-              v-on:keyup.enter="login"
-            ></v-text-field>
+    <v-col md="6" offset-md="3"  >
+        <v-card min-width="500px" class="pa-4 card"
+       >
+        <v-card-title>
+            Login
+        </v-card-title>
+        <v-text-field label="Usuário"
+        v-model="username"
+        outlined>
+        </v-text-field>
+        <v-text-field label="Senha" type="password"
+        append-icon="fa-key"
+        v-model="password"
+        @keyup.enter="login"
+        outlined
+        >
+        </v-text-field>
 
-            <v-text-field
-              v-model="password"
-              label="Senha"
-              type="password"
-              required
-              outlined
-              append-icon="fa-key"
-              v-on:keyup.enter="login"
-            ></v-text-field>
+        <v-btn color="primary" large block @click="login" >
+            Continuar
+        </v-btn>
 
-            <v-btn
-              :loading="loading"
-              :disabled="!valid"
-              color="secondary"
-              class="mr-4"
-              x-large
-              block
-              @click="login"
-              >Continuar <v-icon class="pl-3">fa-arrow-right</v-icon></v-btn
-            >
-          </v-form>
-          <p class="ma-4">
-            <span class="subtitle-1" @click="vaiParaCadastro"
-              >Não tenho conta! Fazer <a href="">Cadastro</a></span
-            >
-          </p>
-        </v-card>
-      </v-col>
-    </v-row>
+        <v-card-text> Não tenho conta! Fazer <a href="/register" >Cadastro</a></v-card-text>
+    </v-card>
+    </v-col>
+</v-row>
+   
   </v-container>
 </template>
 
 <script>
-import AuthApi from "@/api/auth.api.js";
+
+
+import instancia from "@/api/instancia";
 export default {
   data: () => {
     return {
-      loading: false,
-      valid: false,
-      username: "",
-      password: "",
-      snackbar: {
-        show: false,
-        message: "",
-      },
-    };
+      username: '',
+      password: '',
+    }
   },
   methods: {
-    vaiParaResume() {
-      this.$router.push("/resume");
+    apiLogin () {
+      const data = {
+        username: this.username,
+        password: this.password,
+      }
+      const formData = new FormData()
+      for (const k of Object.keys(data)) {
+        formData.append(k, data[k])
+      }
+      return new Promise((resolve, reject) => {
+        instancia
+          .post('/api/login', formData)
+          .then((response) => {
+            this.$router.push({name: 'taskList'})
+            return resolve(response.data)
+          })
+          .catch((error) => {
+            return reject(error)
+          })
+      })
     },
-    vaiParaCadastro() {
-      this.$router.push("/register");
-    },
-    login() {
-      this.loading = true;
-      AuthApi.login(this.username, this.password)
+    login () {
+      this.apiLogin()
         .then((user) => {
-          console.log("login ok", user);
-          this.saveLoggedUser(user);
-          this.$router.push({ name: "resume" });
+          // salva apenas para caso precise exibir no app bar
+          // nao precisa pegar para fazer request
+          localStorage.setItem('loggedUser', JSON.stringify(user))
+          console.log('logado!')
         })
         .catch((error) => {
-          console.log("login falhou", error);
-          this.snackbar.message = "Usuario ou senha invalida";
-          this.snackbar.show = true;
+          console.log('Usuario ou senha invalida', error)
         })
-        .finally(() => {
-          this.loading = false;
-        });
     },
-    saveLoggedUser(user) {
-      window.localStorage.setItem("loggedUser", user.id);
-      window.localStorage.setItem("loggedUserToken", user.token);
-    },
-  },
-};
+  }
+}
 </script>
+
+<style scoped>
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+    .card {
+        padding: 1rem;
+
+    }
+</style>

@@ -1,20 +1,14 @@
 [
-  {
-    "id": 1,
-    "name": "Jorge Oliva",
-    "username": "jorge",
-    "email": "jorgeo@example.com"
-  },
-  {
-    "id": 2,
-    "name": "John Doe",
-    "username": "john",
-    "email": "jd@example.com"
-  },
-  {
-    "id": 3,
-    "name": "Daniel Dantas",
-    "username": "danidanis",
-    "email": "jd@example.com"
-  }
-]
+    {
+      "id": 1,
+      "name": "Jorge Oliva",
+      "username": "jorge",
+      "email": "jorgeo@example.com"
+    },
+    {
+      "id": 2,
+      "name": "John Doe",
+      "username": "john",
+      "email": "jd@example.com"
+    }
+  ]

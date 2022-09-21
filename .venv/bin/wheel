@@ -1,4 +1,4 @@
-#!/home/fabricioassuncao/desafio-almoco/.venv/bin/python
+#!/home/fabricioassuncao/desafio-almoco/desafio/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

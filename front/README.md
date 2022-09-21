@@ -1,11 +1,4 @@
-# meu-todo-vuetify
-
-### Features necessaria para funcionar, já identificadas
-
-Atualizar o codigo do arquivo TasksApi.js para realizar as consultas no banco de dados de forma correta para conseguir preencher todas as paginas.
-Terminar de desenvolver a pagina de adicionar curso e adicionar a chave estrangeira relacionada a tarefa.
-Conseguir adicionar/remover cursos.
-Conseguir adicionar,remover e editar tarefas.
+# vue-route-todo
 
 ## Project setup
 ```
@@ -27,4 +20,5 @@ npm run build
 npm run lint
 ```
 
-
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
